@@ -1,0 +1,3 @@
+Nome: Ana | Idade: 25 | Cidade: São Paulo  
+Nome: Carlos | Idade: 30 | Cidade: Rio de Janeiro  
+Nome: Mariana | Idade: 22 | Cidade: Belo Horizonte  
