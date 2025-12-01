@@ -78,7 +78,7 @@ def processar_ataque(coord, tamanho, tabuleiro, embarcacoes_do_jogo):
     return True, mensagem_ataque
 
 def exibir_estatisticas(tabuleiro):
-    """Exibe as estatísticas do tabuleiro e as posições atacadas."""
+    # Exibe as estatísticas do tabuleiro e as posições atacadas
     stats = estatisticas_tabuleiro(tabuleiro)
     posicoes_ordenadas = ordenar_posicoes_atacadas(tabuleiro)
 
@@ -154,7 +154,8 @@ if __name__ == "__main__":
     
     if escolha == "1":
         from interface import TkinterGameUI
-        game_ui = TkinterGameUI(10)
+        tamanho = obter_tamanho_tabuleiro()
+        game_ui = TkinterGameUI(tamanho)
         game_ui.run()
     else:
         # Modo terminal original

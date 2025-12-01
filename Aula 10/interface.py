@@ -6,7 +6,7 @@ from embarcacoes import PortaAvioes, NavioTanque, Contratorpedeiro, Submarino, t
 from estatisticas import estatisticas_tabuleiro
 
 class TkinterGameUI:
-    def __init__(self, tamanho=10):
+    def __init__(self, tamanho):
         self.tamanho = tamanho
         self.root = tk.Tk()
         self.root.title("Batalha Naval")
@@ -32,7 +32,7 @@ class TkinterGameUI:
         self.setup_ui()
         
     def posicionar_embarcacoes_teste(self):
-        """Posiciona as embarcações no tabuleiro para teste"""
+        # Posiciona as embarcações no tabuleiro para teste
         if self.tamanho >= 5:
             # Porta-Aviões (5 posições) - Linha 0, Colunas 0 a 4
             self.embarcacoes_do_jogo[0].definir_posicao([(0, i) for i in range(5)])
@@ -50,7 +50,7 @@ class TkinterGameUI:
                         self.tabuleiro[r, c] = embarcacao.simbolo
     
     def setup_ui(self):
-        """Configura a interface gráfica"""
+        # Configura a interface gráfica
         # Frame principal
         main_frame = tk.Frame(self.root)
         main_frame.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
@@ -88,7 +88,7 @@ class TkinterGameUI:
                 btn = tk.Button(
                     board_frame, 
                     text="~", 
-                    width=3, 
+                    width=1, 
                     height=1,
                     font=("Arial", 10),
                     command=lambda row=i, col=j: self.handle_click(row, col)
@@ -129,14 +129,14 @@ class TkinterGameUI:
         sair_btn.pack(side=tk.LEFT, padx=5)
     
     def get_embarcacoes_status(self):
-        """Retorna o status das embarcações como string formatada"""
+        # Retorna o status das embarcações como string formatada
         status = "Embarcações:\n"
         for emb in self.embarcacoes_do_jogo:
             status += f"- {emb.nome}: {'AFUNDADO' if emb.afundada else 'ATIVO'}\n"
         return status
     
     def handle_click(self, row, col):
-        """Processa o clique em uma célula do tabuleiro"""
+        # Processa o clique em uma célula do tabuleiro
         if not self.jogo_ativo:
             return
             
@@ -196,7 +196,7 @@ class TkinterGameUI:
         self.turno_label.config(text=f"Turno: {self.turno}")
     
     def mostrar_estatisticas(self):
-        """Exibe as estatísticas do jogo"""
+        # Exibe as estatísticas do jogo
         stats = estatisticas_tabuleiro(self.tabuleiro)
         
         estatisticas_texto = (
@@ -211,7 +211,7 @@ class TkinterGameUI:
         messagebox.showinfo("Estatísticas", estatisticas_texto)
     
     def novo_jogo(self):
-        """Reinicia o jogo com um novo tabuleiro"""
+        # Reinicia o jogo com um novo tabuleiro
         if messagebox.askyesno("Novo Jogo", "Tem certeza que deseja iniciar um novo jogo?"):
             self.tabuleiro, self.cabecalhoDasColunas = inicializar_tabuleiro(self.tamanho)
             self.embarcacoes_do_jogo = [
@@ -225,7 +225,7 @@ class TkinterGameUI:
             # Resetar interface
             for i in range(self.tamanho):
                 for j in range(self.tamanho):
-                    self.botoes[i][j].config(text="~", bg="SystemButtonFace", fg="black")
+                    self.botoes[i][j].config(text="~", bg="grey", fg="black")
             
             self.jogo_ativo = True
             self.turno = 1
@@ -234,12 +234,12 @@ class TkinterGameUI:
             self.message_label.config(text="Novo jogo iniciado! Clique em uma célula para atacar.")
     
     def sair(self):
-        """Fecha o jogo"""
+        # Fecha o jogo.
         if messagebox.askyesno("Sair", "Tem certeza que deseja sair do jogo?"):
             self.root.quit()
     
     def run(self):
-        """Inicia a interface gráfica"""
+        # Inicia a interface gráfica.
         self.root.mainloop()
 
 if __name__ == "__main__":
